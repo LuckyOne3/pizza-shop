@@ -1,38 +1,89 @@
-.App {
-  text-align: center;
+.card{
+  box-shadow: 0 6px 18px rgba(14,21,47,.1), 0 -2px 6px rgba(14,21,47,.02);
+  margin-bottom: 20px;
+  padding: 9px;
+  border-radius: 10px;
+  transition: 0.3s;
+  border: none;
+}
+.shadow{
+  box-shadow: 0 6px 18px rgba(14,21,47,.1), 0 -2px 6px rgba(14,21,47,.02);
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.btn{
+  font-size: calc(10px + 0.7vmin);
+}
+.card img{
+  margin: auto;
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+.price{
+  font-size: calc(10px + 0.7vmin);
+}
+.card-title{
+  font-size: calc(10px + 1vmin);
+  font-weight: bold;
+}
+.card-text{
+  font-size: calc(10px + 0.5vmin);
+}
+.opacity-0-pizza{
+  opacity: 0;
+  height: 25vh;
+  overflow: hidden;
+  width: 0px;
+}
+.opacity-0-loader{
+  opacity: 0;
+  height: 0px;
+  overflow: hidden;
+  width: 0px;
+}
+.opacity-1{
+  opacity: 0;
+  height: auto;
+  overflow: auto;
+  width: 0px;
+}
+.forNotif{
+  position: relative; min-height: 200px;
+}
+.forNotifPosition{
+  position: fixed; top: 80px; right: 20px;
+  z-index: 9999;
+}
+.opacity-visible{
+  opacity: 1;
+}
+.mt-8 {
+  margin-top: 80px;
+}
+a{
+  text-decoration: none!important;
+}
+.bor-rad{
+  border-radius: 9999px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.button{
+  cursor: pointer;
+}
+.mh-250{
+  max-height: 150px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.card-img {
+  margin: 0px!important;
+  max-height: 100px;
+  object-fit: contain;
+}
+.pointer{
+  cursor: pointer;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.red{
+  color: red;
 }
