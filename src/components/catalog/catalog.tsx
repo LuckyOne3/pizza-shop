@@ -1,14 +1,15 @@
 import React, {useEffect} from 'react';
 
+import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
+// @ts-ignore
+import Loader from 'react-loader-spinner'
+
 import {Item} from './item'
 import {useDispatch, useSelector} from "react-redux";
 import {fetchPizzas, lastPizza} from "../../redux/actions/pizzas";
 import {addPizza} from '../../redux/actions/cart';
 
 
-import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
-// @ts-ignore
-import Loader from 'react-loader-spinner'
 import {Notification} from "./notification";
 
 

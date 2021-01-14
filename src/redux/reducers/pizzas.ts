@@ -1,7 +1,7 @@
 
 
 const initialState = {
-   items:[],
+    items:[],
     isLoaded:false
 };
 

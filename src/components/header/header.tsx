@@ -3,6 +3,8 @@ import Pizza from '../../assets/20v58PICD9d7z4V41T3Ui_PIC2018.png_860.png'
 import {Link} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 import {setCurrency} from "../../redux/actions/cart";
+// @ts-ignore
+import Currency from 'react-currency-formatter';
 
 
 export const Header: React.FC = () => {
@@ -35,7 +37,14 @@ export const Header: React.FC = () => {
                             <Link to="/cart">
                                 <div className="btn-group" role="group">
 
-                                    <button type="button" className="btn btn-primary bor-rad">{totalPrice} | <svg
+                                    <button type="button" className="btn btn-primary bor-rad">
+                                        <span className="mr-2">
+                                        <Currency
+                                            quantity={totalPrice}
+                                            currency={currency}
+                                        />
+                                        </span>
+                                         | <svg
                                         width="18"
                                         height="18"
                                         viewBox="0 0 18 18"
@@ -58,7 +67,7 @@ export const Header: React.FC = () => {
                             </Link>
                         </div>
                         <div className="d-flex">
-                            {!user
+                            {!user.token
                                 ?
                                 <Link to="/auth/signin">
                                     <div className="btn-group" role="group">

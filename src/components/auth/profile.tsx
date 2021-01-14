@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 // @ts-ignore
 import { Formik, Field, Form } from "formik";
-import {Item} from "../catalog/item";
+import {fetchShowOrders} from "../../redux/actions/cart";
+// @ts-ignore
+import Currency from 'react-currency-formatter';
 
 function validateEmail(value:any) {
     let error;
@@ -18,6 +20,12 @@ export const Profile:React.FC = () => {
     // @ts-ignore
     const {  user } = useSelector(({ cart }) => cart);
 
+    useEffect(() => {
+        // code to run on component mount
+        dispatch(fetchShowOrders(user.email))
+
+    }, [])
+
 
 
 
@@ -27,10 +35,36 @@ export const Profile:React.FC = () => {
             <span>Email:{user.email}</span>
             <span>Name:{user.name}</span>
             <h1> History</h1>
+            <div className="row">
             {
-                user.orders ?  user.orders.map((obj: any, index: any, array: any) => <div key={index + obj.street}>obj.street + obj.flatOffice + obj.floor+ obj.totalPrice +obj.currency </div>) : <div>nothing</div>
+                user.orders[0]
+                    ? user.orders.map((obj: any, index: any, array: any) =>
+                        <div className='col-4' key={index + obj.id}>
+
+                            <div className="card">
+                                <div className="card-body justify-content-center text-center">
+                                    <div className="card-title  ">Total Price: <Currency
+                                        quantity={obj.totalprice}
+                                        currency={obj.currency}
+                                    /></div>
+                                    <p className="card-text  ">Street: {obj.street}</p>
+                                    <p className="card-text  ">Flat/Office: {obj.flatoffice}</p>
+                                    <p className="card-text  ">Floor :{obj.floor}</p>
+
+                                    <div className="flex-row d-flex justify-content-between align-items-center">
+                                        <div className="d-flex price">
+
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )
+                    : <div>nothing</div>
 
             }
+            </div>
         </div>
     )
 }

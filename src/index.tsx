@@ -7,6 +7,8 @@ import store from './redux/store'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
+
+
 function saveToLocalStorage(state:any) {
     try {
         const serializeState = JSON.stringify(state)

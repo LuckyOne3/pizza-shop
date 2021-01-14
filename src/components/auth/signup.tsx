@@ -3,7 +3,9 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 // @ts-ignore
 import { Formik, Field, Form } from "formik";
-import {plusCartItem} from "../../redux/actions/cart";
+import {fetchSetUser} from "../../redux/actions/cart";
+import {useHistory} from "react-router-dom"
+
 
 function validateEmail(value:any) {
     let error;
@@ -48,6 +50,8 @@ function validateName(value:any) {
 
 
 export const SignUp:React.FC = () => {
+
+    let history = useHistory();
     const dispatch = useDispatch();
     // @ts-ignore
     const { totalPrice, totalCount, items, currency, delivery } = useSelector(({ cart }) => cart);
@@ -62,19 +66,21 @@ export const SignUp:React.FC = () => {
         <div className="container col-sm-4 mt-8">
             <Formik
                 initialValues={{
+                    name: "",
                     email: "",
                     password: "",
-                    confirmPassword: "",
-                    name: ""
+                    confirmPassword: ""
                 }}
                 onSubmit={async (values) => {
-                    // @ts-ignore
-                    if(values.email === "test@mail.ru" && values.password === "password"){
-                        const onPlusItem = (id:any) => {
-                            dispatch(plusCartItem(id));
-                        };
+                    let data = {
+                        name: values.name,
+                        email: values.email,
+                        password: values.password,
+                        password_confirmation: values.confirmPassword
                     }
-                    alert(JSON.stringify(values, null, 2));
+                            dispatch(fetchSetUser(data));
+                            history.push("/")
+
                 }}
             >
 

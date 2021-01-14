@@ -5,9 +5,9 @@ const initialState = {
     currency: "USD",
     delivery: {"USD": 20, "EUR": 30},
     user:{
-        email:"",
+        token: "",
         name: "",
-        password:"",
+        email:"",
         orders: []
     }
 };
@@ -164,44 +164,34 @@ const cart = (state = initialState, action: any) => {
         }
 
         case 'SET_USER': {
+            console.log(action.payload)
+
+            const data = state.user
+            data.token = action.payload.token
+            data.email = action.payload.email
+            data.name  = action.payload.name
 
             return {
                 ...state,
-                user: {
-                    email: action.payload.email,
-                    password: action.payload.password,
-                    name: action.payload.name,
-                }
-
-
+                user: data
 
             };
         }
-
         case 'SET_ORDERS': {
-                // @ts-ignore
-            const currentItems = !state.user.orders
-                ? {street:action.payload.street,flatOffice:action.payload.flatOffice,floor:action.payload.floor,totalPrice:action.payload.totalPrice,currency:action.payload.currency}
-                // @ts-ignore
-                : [...state.user.orders, {street:action.payload.street,flatOffice:action.payload.flatOffice,floor:action.payload.floor,totalPrice:action.payload.totalPrice,currency:action.payload.currency}];
 
-
-
+            const data = state.user
+            data.orders = action.payload
 
             return {
                 ...state,
-                user: {
-                    // @ts-ignore
-                    name:state.user.name,
-                    email:state.user.email,
-                    password:state.user.password,
-                    orders: currentItems
-                }
+                user :data
 
 
 
             };
         }
+
+
 
         default:
             return state;

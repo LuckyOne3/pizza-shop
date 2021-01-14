@@ -2,7 +2,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {CartItem} from './cartItem'
-import {clearCart, removeCartItem, plusCartItem, minusCartItem, setOrder} from './../../redux/actions/cart';
+import {
+    clearCart,
+    removeCartItem,
+    plusCartItem,
+    minusCartItem,
+    fetchSetOrder
+} from './../../redux/actions/cart';
 
 // @ts-ignore
 import Currency from 'react-currency-formatter';
@@ -47,9 +53,6 @@ export const Cart:React.FC = () => {
         dispatch(minusCartItem(id));
     };
 
-    const onAddOrder = (payload:any) => {
-        dispatch(setOrder(payload));
-    };
 
 
 
@@ -177,18 +180,27 @@ export const Cart:React.FC = () => {
                                         floor: ""
                                     }}
                                     onSubmit={async (values) => {
-                                        // @ts-ignore
-                                        values.totalPrice = totalPrice + delivery[currency]
-                                        // @ts-ignore
-                                        values.totalCount = totalCount
-                                        // @ts-ignore
-                                        values.currency = currency
-                                        if(user.email){
-                                            const dataForServer = Object.assign(values,items)
-
-                                            onAddOrder(dataForServer)
+                                        let data = {
+                                            name:"guest",
+                                            email:"guest",
+                                            street:"",
+                                            flatoffice:"",
+                                            floor:"",
+                                            totalprice:"",
+                                            currency:""
                                         }
+                                        if(user.email){
 
+                                            data.name = user.name
+                                            data.email = user.email
+                                        }
+                                        data.street = values.street
+                                        data.flatoffice = values.flatOffice
+                                        data.floor = values.floor
+                                        data.totalprice = totalPrice + delivery[currency]
+                                        data.currency = currency
+
+                                        dispatch(fetchSetOrder(data));
 
                                          onClearCart()
                                     }}

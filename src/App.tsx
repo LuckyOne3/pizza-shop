@@ -12,6 +12,8 @@ import {Profile} from "./components/auth/profile";
 
 const App: React.FC = () => {
 
+
+
     return (
         <div className="App">
             <Header/>
