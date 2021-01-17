@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {CartItemPizza} from "../../types";
 const API = process.env.REACT_APP_API
 
 
@@ -35,7 +36,7 @@ export const lastPizza = () => (dispatch:any)=> {
         })
 }
 
-export const setPizzas = (items:any) => (
+export const setPizzas = (items:CartItemPizza) => (
     {
         type: 'SET_PIZZAS',
         payload: items

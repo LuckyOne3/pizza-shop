@@ -41,13 +41,13 @@ export const CartItem: React.FC<RenderPizzaCart> = (props) => {
                             <div className="row btn-light bor-rad p-2">
                                 <div
                                     onClick={handleMinusItem}
-                                    className="button pr-2 ">
+                                    className="btn pr-2 ">
                                     -
                                 </div>
-                                <div>{props.totalCount}</div>
+                                <div className="btn">{props.totalCount}</div>
                                 <div
                                     onClick={handlePlusItem}
-                                    className="button pl-2">
+                                    className="btn pl-2">
                                     +
                                 </div>
                             </div>

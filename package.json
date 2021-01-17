@@ -24,6 +24,7 @@
     "react-loader-spinner": "^3.1.14",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
+    "react-toastify": "^6.2.0",
     "redux-suspense": "0.0.5",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.2.1",

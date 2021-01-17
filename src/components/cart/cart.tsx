@@ -1,6 +1,7 @@
 import React from 'react';
 import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
-import {Link} from 'react-router-dom';
+import {Link,useHistory} from 'react-router-dom';
+
 import {CartItem} from './cartItem'
 import {
     clearCart,
@@ -8,7 +9,7 @@ import {
     plusCartItem,
     minusCartItem,
     fetchSetOrder
-} from './../../redux/actions/cart';
+} from '../../redux/actions/cart';
 
 // @ts-ignore
 import Currency from 'react-currency-formatter';
@@ -25,6 +26,7 @@ function validate(value: any) {
 }
 
 export const Cart: React.FC = () => {
+    let history = useHistory();
     const dispatch = useDispatch();
     const {totalPrice, totalCount, items, currency, delivery, user} = useSelector(({cart}: RootStateOrAny) => cart);
 
@@ -63,7 +65,7 @@ export const Cart: React.FC = () => {
                                  src="https://img.icons8.com/ios-filled/24/000000/shopping-cart.png"/>
                             Cart
                         </div>
-                        <div className="d-flex align-items-center ">
+                        <div className="d-flex align-items-center pointer">
                             <svg
                                 className="mr-2"
                                 width="20"
@@ -101,7 +103,7 @@ export const Cart: React.FC = () => {
                                 />
                             </svg>
 
-                            <span onClick={onClearCart}>Clear cart</span>
+                            <span  onClick={onClearCart}>Clear cart</span>
                         </div>
                     </div>
                     <div className="row">
@@ -148,7 +150,7 @@ export const Cart: React.FC = () => {
               </span>
                         </div>
                         <div className="cart__bottom-buttons d-flex flex-row justify-content-between mt-4">
-                            <Link to="/" className="button ">
+                            <Link to="/" className="btn ">
                                 <svg
                                     width="8"
                                     height="14"
@@ -165,9 +167,9 @@ export const Cart: React.FC = () => {
                                         strokeLinejoin="round"
                                     />
                                 </svg>
-                                <Link to="/">
+
                                     <button className="btn btn-primary bor-rad">Go back</button>
-                                </Link>
+
                             </Link>
                             <div>
                                 <Formik
@@ -198,8 +200,7 @@ export const Cart: React.FC = () => {
                                         data.currency = currency
 
                                         dispatch(fetchSetOrder(data));
-
-                                        onClearCart()
+                                        history.push("/")
                                     }}
                                 >
 
@@ -259,9 +260,9 @@ export const Cart: React.FC = () => {
                                 strokeLinejoin="round"
                             />
                         </svg>
-                        <Link to="/">
+
                             <button className="btn btn-primary bor-rad">Go back</button>
-                        </Link>
+
                     </Link>
                 </div>
             )}

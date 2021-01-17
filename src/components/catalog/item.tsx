@@ -62,7 +62,7 @@ export const Item: React.FC<RenderPizza> = (props) => {
                         </div>
                         <div className="d-flex">
 
-                            <button type="button" className="btn btn-primary" onClick={onAddPizza}>Add</button>
+                            <button type="button" className="btn button btn-primary" onClick={onAddPizza}>Add</button>
 
 
                         </div>

@@ -3,7 +3,7 @@ export type CartItemPizza = {
     imageUrl: string,
     name: string,
     price: {
-        [key: string]: number
+        [key: string]: number | string
     }
 }
 
@@ -22,4 +22,17 @@ export type RenderPizzaCart = {
     onPlus: (index: number) => void,
     currency: string,
     data: CartItemPizza
+}
+
+export type RenderPizzaOrders = {
+    id:number,
+    name:string,
+    email:string,
+    street:string,
+    flatoffice:string,
+    floor:string,
+    totalprice:number,
+    currency:string,
+    created_at:string,
+    updated_at:string
 }

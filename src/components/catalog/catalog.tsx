@@ -9,7 +9,7 @@ import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchPizzas, lastPizza} from "../../redux/actions/pizzas";
 import {addPizza} from '../../redux/actions/cart';
 
-import {Notification} from "./notification";
+
 
 import {CartItemPizza} from "../../types";
 

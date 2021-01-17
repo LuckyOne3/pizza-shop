@@ -1,15 +1,18 @@
 import React, {useEffect} from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
 
 import {fetchShowOrders} from "../../redux/actions/cart";
 // @ts-ignore
 import Currency from 'react-currency-formatter';
+import { RenderPizzaOrders} from "../../types";
+
+
+
 
 
 export const Profile: React.FC = () => {
     const dispatch = useDispatch();
-    // @ts-ignore
-    const {user} = useSelector(({cart}) => cart);
+    const {user} = useSelector(({cart} :RootStateOrAny) => cart);
 
     useEffect(() => {
         // code to run on component mount
@@ -27,7 +30,7 @@ export const Profile: React.FC = () => {
             <div className="row">
                 {
                     user.orders[0]
-                        ? user.orders.map((obj: any, index: any, array: any) =>
+                        ? user.orders.map((obj: RenderPizzaOrders, index: number) =>
                             <div className='col-4' key={index + obj.id}>
 
                                 <div className="card">
