@@ -7,14 +7,13 @@ import {setCurrency} from "../../redux/actions/cart";
 import Currency from 'react-currency-formatter';
 
 
-
 import 'react-toastify/dist/ReactToastify.css';
 
 export const Header: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const {totalCount,totalPrice, currency, user} = useSelector(({cart}: RootStateOrAny) => (cart))
+    const {totalCount, totalPrice, currency, user} = useSelector(({cart}: RootStateOrAny) => (cart))
 
     return (
         <nav className="navbar navbar-light bg-light fixed-top shadow">
@@ -49,11 +48,11 @@ export const Header: React.FC = () => {
                                         </span>
                                         <span> | </span>
                                         <span className="ml-2"><svg
-                                        width="16"
-                                        height="16"
-                                        viewBox="0 0 18 18"
-                                        fill="none"
-                                        xmlns="http://www.w3.org/2000/svg">
+                                            width="16"
+                                            height="16"
+                                            viewBox="0 0 18 18"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg">
                                         <path
                                             d="M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z"
                                             stroke="white" strokeWidth="1.8" strokeLinecap="round"
@@ -71,7 +70,7 @@ export const Header: React.FC = () => {
                             </Link>
                         </div>
                         <div className="d-flex">
-                            {!user.token
+                            {!user || !user.token
                                 ?
                                 <Link to="/auth/signin">
                                     <div className="btn-group" role="group">

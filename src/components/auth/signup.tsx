@@ -2,6 +2,8 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 // @ts-ignore
+import { CSSTransitionGroup } from 'react-transition-group'
+// @ts-ignore
 import {Formik, Field, Form} from "formik";
 import {fetchSetUser} from "../../redux/actions/cart";
 import {useHistory} from "react-router-dom"
@@ -57,6 +59,12 @@ export const SignUp: React.FC = () => {
 
 
     return (
+        <CSSTransitionGroup
+            transitionName="Transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
         <div className="container col-sm-4 mt-8">
             <Formik
                 initialValues={{
@@ -118,6 +126,7 @@ export const SignUp: React.FC = () => {
                     )}
             </Formik>
         </div>
+        </CSSTransitionGroup>
     );
 
 }

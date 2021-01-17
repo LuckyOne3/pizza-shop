@@ -1,7 +1,8 @@
 import React from 'react';
 import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
 import {Link,useHistory} from 'react-router-dom';
-
+// @ts-ignore
+import { CSSTransitionGroup } from 'react-transition-group'
 import {CartItem} from './cartItem'
 import {
     clearCart,
@@ -10,7 +11,6 @@ import {
     minusCartItem,
     fetchSetOrder
 } from '../../redux/actions/cart';
-
 // @ts-ignore
 import Currency from 'react-currency-formatter';
 // @ts-ignore
@@ -56,6 +56,12 @@ export const Cart: React.FC = () => {
     };
 
     return (
+        <CSSTransitionGroup
+            transitionName="Transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
         <div className="container  mt-8">
             {totalCount ? (
                 <div className="cart">
@@ -267,6 +273,7 @@ export const Cart: React.FC = () => {
                 </div>
             )}
         </div>
+        </CSSTransitionGroup>
     );
 }
 

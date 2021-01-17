@@ -164,7 +164,6 @@ const cart = (state = initialState, action: any) => {
         }
 
         case 'SET_USER': {
-            console.log(action.payload)
 
             const data = state.user
             data.token = action.payload.token
@@ -174,6 +173,20 @@ const cart = (state = initialState, action: any) => {
             return {
                 ...state,
                 user: data
+
+            };
+        }
+        case 'UNSET_USER': {
+
+
+            return {
+                ...state,
+                user: {
+                    token: "",
+                    name: "",
+                    email:"",
+                    orders: []
+                }
 
             };
         }

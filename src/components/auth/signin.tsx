@@ -2,6 +2,8 @@ import React from 'react';
 import { useDispatch} from 'react-redux';
 import {Link} from 'react-router-dom';
 // @ts-ignore
+import { CSSTransitionGroup } from 'react-transition-group'
+// @ts-ignore
 import {Formik, Field, Form} from "formik";
 import {fetchLoginUser} from "../../redux/actions/cart";
 import {useHistory} from "react-router-dom"
@@ -33,6 +35,12 @@ export const SignIn: React.FC = () => {
 
 
     return (
+        <CSSTransitionGroup
+            transitionName="Transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
         <div className="container col-sm-4 mt-8">
             <Formik
                 initialValues={{
@@ -42,7 +50,7 @@ export const SignIn: React.FC = () => {
                 onSubmit={async (values) => {
 
                     dispatch(fetchLoginUser(values));
-                    // @ts-ignore
+
                     history.push("/")
 
 
@@ -50,7 +58,7 @@ export const SignIn: React.FC = () => {
             >
 
                 { //@ts-ignore
-                    ({isSubmitting, errors, touched, isValidating}) => (
+                    ({isSubmitting, errors, touched}) => (
                         <Form className="form-group d-flex flex-column">
                             <label htmlFor="email">Email</label>
                             <Field name="email" type="email" validate={validateEmail} placeholder="test@mail.ru"/>
@@ -75,6 +83,7 @@ export const SignIn: React.FC = () => {
                     )}
             </Formik>
         </div>
+        </CSSTransitionGroup>
     );
 
 }

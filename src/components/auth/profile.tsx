@@ -1,16 +1,20 @@
 import React, {useEffect} from 'react';
 import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
+// @ts-ignore
+import { CSSTransitionGroup } from 'react-transition-group'
 
-import {fetchShowOrders} from "../../redux/actions/cart";
+import {fetchShowOrders, unsetUser} from "../../redux/actions/cart";
 // @ts-ignore
 import Currency from 'react-currency-formatter';
 import { RenderPizzaOrders} from "../../types";
+import {useHistory} from "react-router-dom";
 
 
 
 
 
 export const Profile: React.FC = () => {
+    let history = useHistory();
     const dispatch = useDispatch();
     const {user} = useSelector(({cart} :RootStateOrAny) => cart);
 
@@ -20,12 +24,26 @@ export const Profile: React.FC = () => {
 
     }, [])
 
+    const unsetUserHandler = () => {
+        dispatch(unsetUser())
+        history.push("/")
+    }
+
 
     return (
+        <CSSTransitionGroup
+            transitionName="Transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
         <div className="container  flex-column d-flex   mt-8 text-center">
             <h1> Profile</h1>
             <span>Email:{user.email}</span>
-            <span>Name:{user.name}</span>
+            <span className="mb-4">Name:{user.name}</span>
+            <button type="submit" className="btn pointer bor-rad btn-primary  w-25 m-auto" onClick={unsetUserHandler}>
+                <span>Log Out</span>
+            </button>
             <h1> History</h1>
             <div className="row">
                 {
@@ -58,6 +76,7 @@ export const Profile: React.FC = () => {
                 }
             </div>
         </div>
+        </CSSTransitionGroup>
     )
 }
 

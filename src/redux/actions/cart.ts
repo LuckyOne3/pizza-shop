@@ -96,6 +96,11 @@ export const setUser = (payload: any) => ({
     type: 'SET_USER',
     payload
 });
+export const unsetUser = () => {
+
+    toast.success("Your are logged out!");
+    return {type: 'UNSET_USER'}
+};
 export const setOrders = (payload: any) => ({
     type: 'SET_ORDERS',
     payload

@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
-
+// @ts-ignore
+import { CSSTransitionGroup } from 'react-transition-group'
 import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 // @ts-ignore
 import Loader from 'react-loader-spinner'
-
 import {Item} from './item'
 import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchPizzas, lastPizza} from "../../redux/actions/pizzas";
@@ -45,7 +45,12 @@ export const Catalog: React.FC = () => {
     const ItemsArrayLenght = items.length - 1
 
     return (
-
+        <CSSTransitionGroup
+            transitionName="Transition"
+            transitionAppear={true}
+            transitionAppearTimeout={500}
+            transitionEnter={false}
+            transitionLeave={false}>
         <div className='container mt-8'>
             <div className={isLoaded ? 'row invisible opacity-0-loader' : 'row'}>
                 {
@@ -61,6 +66,7 @@ export const Catalog: React.FC = () => {
                 }
             </div>
         </div>
+        </CSSTransitionGroup>
     );
 }
 
