@@ -3,7 +3,7 @@ import React from 'react';
 // @ts-ignore
 import Currency from 'react-currency-formatter';
 
-import {RenderPizzaCart} from "../types";
+import {RenderPizzaCart} from "../../types";
 
 
 export const CartItem: React.FC<RenderPizzaCart> = (props) => {

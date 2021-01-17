@@ -11,7 +11,7 @@ import {addPizza} from '../../redux/actions/cart';
 
 import {Notification} from "./notification";
 
-import {CartItemPizza} from "../types";
+import {CartItemPizza} from "../../types";
 
 
 const loader = <Loader className="m-auto"

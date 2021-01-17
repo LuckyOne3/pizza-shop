@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 
 // @ts-ignore
 import Currency from 'react-currency-formatter';
-import {RenderPizza} from "../types";
+import {RenderPizza} from "../../types";
 
 
 export const Item: React.FC<RenderPizza> = (props) => {

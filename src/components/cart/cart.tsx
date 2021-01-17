@@ -14,7 +14,7 @@ import {
 import Currency from 'react-currency-formatter';
 // @ts-ignore
 import {Formik, Field, Form} from "formik";
-import {CartItemPizza} from "../types";
+import {CartItemPizza} from "../../types";
 
 function validate(value: any) {
     let error;
