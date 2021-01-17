@@ -61,13 +61,13 @@ export const SignIn: React.FC = () => {
                     ({isSubmitting, errors, touched}) => (
                         <Form className="form-group d-flex flex-column">
                             <label htmlFor="email">Email</label>
-                            <Field name="email" type="email" validate={validateEmail} placeholder="test@mail.ru"/>
+                            <Field name="email" type="email" validate={validateEmail} placeholder="Enter Email"/>
                             {errors.email && touched.email && (
                                 <div className="red mt-2">{errors.email}</div>
                             )}
 
                             <label htmlFor="password" className="mt-2">Password</label>
-                            <Field name="password" type="password" validate={validatePassword} placeholder=""/>
+                            <Field name="password" type="password" validate={validatePassword} placeholder="Enter Password"/>
                             {errors.password && touched.password && (
                                 <div className="red mt-2">{errors.password}</div>
                             )}

@@ -57,7 +57,6 @@ export const fetchSetUser = (userData: fetchSetUserT) => async (dispatch: any) =
     try {
         const response = await axios.post(API + '/register', userData);
         await response;
-        console.log(userData)
         dispatch(fetchLoginUser({name: userData.name, email: userData.email, password: userData.password}))
         toast.success("Your are registered!");
     } catch (err) {
@@ -71,7 +70,6 @@ export const fetchSetOrder = (userData: fetchSetOrderT) => async (dispatch:any) 
     try {
         const response = await axios.post(API + '/order-make', userData);
         await response;
-        console.log(userData)
         toast.success("Your order is accepted!");
         dispatch(clearCart())
     } catch (err) {
