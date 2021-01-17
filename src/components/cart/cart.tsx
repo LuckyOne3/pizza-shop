@@ -194,6 +194,7 @@ export const Cart: React.FC = () => {
                                             totalprice: "",
                                             currency: ""
                                         }
+
                                         if (user.email) {
 
                                             data.name = user.name

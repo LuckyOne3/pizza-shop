@@ -2,14 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App';
-import {Provider} from 'react-redux'
+import {Provider, RootStateOrAny} from 'react-redux'
 import store from './redux/store'
 import { BrowserRouter as Router } from 'react-router-dom';
 
 
 
 
-function saveToLocalStorage(state:any) {
+function saveToLocalStorage(state:RootStateOrAny) {
     try {
         const serializeState = JSON.stringify(state)
         localStorage.setItem('state', serializeState)

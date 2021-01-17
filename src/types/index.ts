@@ -36,3 +36,31 @@ export type RenderPizzaOrders = {
     created_at:string,
     updated_at:string
 }
+
+export type SetUserT = {
+    name:string,
+    email:string
+}
+
+export type fetchSetOrderT = {
+    name:string,
+    email:string,
+    street:string,
+    flatoffice:string,
+    floor:string,
+    totalprice:string,
+    currency:string
+}
+
+export type fetchSetUserT = {
+    email:string,
+    name:string,
+    password:string,
+    password_confirmation: string
+}
+
+export type fetchLoginUserT = {
+    name?:string
+    email:string,
+    password:string
+}
