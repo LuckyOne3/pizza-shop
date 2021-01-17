@@ -1,12 +1,12 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
 // @ts-ignore
-import { Formik, Field, Form } from "formik";
+import {Formik, Field, Form} from "formik";
 import {fetchLoginUser} from "../../redux/actions/cart";
 import {useHistory} from "react-router-dom"
 
-function validateEmail(value:any) {
+function validateEmail(value: any) {
     let error;
     if (!value) {
         error = 'Required';
@@ -15,7 +15,8 @@ function validateEmail(value:any) {
     }
     return error;
 }
-function validatePassword(value:any) {
+
+function validatePassword(value: any) {
     let error;
     if (!value) {
         error = 'Required';
@@ -24,61 +25,55 @@ function validatePassword(value:any) {
 }
 
 
-export const SignIn:React.FC = () => {
+export const SignIn: React.FC = () => {
 
     let history = useHistory();
 
     const dispatch = useDispatch();
-    // @ts-ignore
-    const { totalPrice, totalCount, items, currency, delivery } = useSelector(({ cart }) => cart);
-
-    const addedPizzas = Object.keys(items).map((key) => {
-        return items[key].items[0];
-    });
-
 
 
     return (
         <div className="container col-sm-4 mt-8">
-                <Formik
-                    initialValues={{
-                        email: "",
-                        password: ""
-                    }}
-                    onSubmit={async (values) => {
+            <Formik
+                initialValues={{
+                    email: "",
+                    password: ""
+                }}
+                onSubmit={async (values) => {
 
-                        dispatch(fetchLoginUser(values));
-                        // @ts-ignore
-                        history.push("/")
+                    dispatch(fetchLoginUser(values));
+                    // @ts-ignore
+                    history.push("/")
 
 
-                    }}
-                >
+                }}
+            >
 
-                    { //@ts-ignore
-                        ({ isSubmitting, errors, touched, isValidating }) => (
-                            <Form className="form-group d-flex flex-column" >
-                                <label htmlFor="email">Email</label>
-                                <Field name="email" type="email" validate={validateEmail} placeholder="test@mail.ru" />
-                                {errors.email && touched.email && (
-                                    <div className="red mt-2">{errors.email}</div>
-                                )}
+                { //@ts-ignore
+                    ({isSubmitting, errors, touched, isValidating}) => (
+                        <Form className="form-group d-flex flex-column">
+                            <label htmlFor="email">Email</label>
+                            <Field name="email" type="email" validate={validateEmail} placeholder="test@mail.ru"/>
+                            {errors.email && touched.email && (
+                                <div className="red mt-2">{errors.email}</div>
+                            )}
 
-                                <label htmlFor="password" className="mt-2">Password</label>
-                                <Field name="password" type="password" validate={validatePassword}  placeholder="" />
-                                {errors.password && touched.password && (
-                                    <div className="red mt-2">{errors.password}</div>
-                                )}
+                            <label htmlFor="password" className="mt-2">Password</label>
+                            <Field name="password" type="password" validate={validatePassword} placeholder=""/>
+                            {errors.password && touched.password && (
+                                <div className="red mt-2">{errors.password}</div>
+                            )}
 
-                                <button type="submit" className="btn pointer bor-rad btn-primary mt-4" disabled={isSubmitting}>
-                                    <span>Sign-in</span>
-                                </button>
-                                <Link to="/auth/signup" className="text-center mt-2">
-                                    <span >Sign-Up</span>
-                                </Link>
-                            </Form>
-                        )}
-                </Formik>
+                            <button type="submit" className="btn pointer bor-rad btn-primary mt-4"
+                                    disabled={isSubmitting}>
+                                <span>Sign-in</span>
+                            </button>
+                            <Link to="/auth/signup" className="text-center mt-2">
+                                <span>Sign-Up</span>
+                            </Link>
+                        </Form>
+                    )}
+            </Formik>
         </div>
     );
 

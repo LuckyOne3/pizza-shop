@@ -2,15 +2,15 @@ import React, {useEffect} from 'react';
 
 // @ts-ignore
 import Currency from 'react-currency-formatter';
+import {RenderPizza} from "../types";
 
 
-export const Item: React.FC = (props: any) => {
-    const arrayLength = props.last.array.length - 1
+export const Item: React.FC<RenderPizza> = (props) => {
 
 
     useEffect(() => {
         // code to run on component mount
-        if (props.last.index === arrayLength) {
+        if (props.last.index === props.last.ItemsArrayLenght) {
             // @ts-ignore
             function preloadImages(sources, callback) {
                 let counter = 0;

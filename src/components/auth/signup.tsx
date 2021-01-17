@@ -1,13 +1,13 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {useDispatch} from 'react-redux';
+import {Link} from 'react-router-dom';
 // @ts-ignore
-import { Formik, Field, Form } from "formik";
+import {Formik, Field, Form} from "formik";
 import {fetchSetUser} from "../../redux/actions/cart";
 import {useHistory} from "react-router-dom"
 
 
-function validateEmail(value:any) {
+function validateEmail(value: any) {
     let error;
     if (!value) {
         error = 'Required';
@@ -16,7 +16,8 @@ function validateEmail(value:any) {
     }
     return error;
 }
-const validatePassword = (values:any) => {
+
+const validatePassword = (values: any) => {
     let error = "";
     const passwordRegex = /(?=.*[0-9])/;
     if (!values) {
@@ -29,7 +30,7 @@ const validatePassword = (values:any) => {
     return error;
 };
 
-const validateConfirmPassword = (pass:any, value:any) => {
+const validateConfirmPassword = (pass: any, value: any) => {
 
     let error = "";
     if (pass && value) {
@@ -40,7 +41,7 @@ const validateConfirmPassword = (pass:any, value:any) => {
     return error;
 };
 
-function validateName(value:any) {
+function validateName(value: any) {
     let error;
     if (!value) {
         error = 'Required';
@@ -49,17 +50,10 @@ function validateName(value:any) {
 }
 
 
-export const SignUp:React.FC = () => {
+export const SignUp: React.FC = () => {
 
     let history = useHistory();
     const dispatch = useDispatch();
-    // @ts-ignore
-    const { totalPrice, totalCount, items, currency, delivery } = useSelector(({ cart }) => cart);
-
-    const addedPizzas = Object.keys(items).map((key) => {
-        return items[key].items[0];
-    });
-
 
 
     return (
@@ -78,44 +72,47 @@ export const SignUp:React.FC = () => {
                         password: values.password,
                         password_confirmation: values.confirmPassword
                     }
-                            dispatch(fetchSetUser(data));
-                            history.push("/")
+                    dispatch(fetchSetUser(data));
+                    history.push("/")
 
                 }}
             >
 
                 { //@ts-ignore
-                    ({ isSubmitting, errors, touched, isValidating,values }) => (
-                        <Form className="form-group d-flex flex-column" >
+                    ({isSubmitting, errors, touched, isValidating, values}) => (
+                        <Form className="form-group d-flex flex-column">
                             <label htmlFor="email">Email</label>
-                            <Field name="email" type="email" validate={validateEmail} placeholder="my@gmail.com" />
+                            <Field name="email" type="email" validate={validateEmail} placeholder="my@gmail.com"/>
                             {errors.email && touched.email && (
                                 <div className="red mt-2">{errors.email}</div>
                             )}
 
                             <label htmlFor="password" className="mt-2">Password</label>
-                            <Field name="password" type="password" validate={validatePassword}  placeholder="" />
+                            <Field name="password" type="password" validate={validatePassword} placeholder=""/>
                             {errors.password && touched.password && (
                                 <div className="red mt-2">{errors.password}</div>
                             )}
 
                             <label htmlFor="confirmPassword" className="mt-2">Confirm Password</label>
-                            <Field name="confirmPassword" type="password" validate={(value: any) => validateConfirmPassword(values.password, value)}  placeholder="" />
+                            <Field name="confirmPassword" type="password"
+                                   validate={(value: any) => validateConfirmPassword(values.password, value)}
+                                   placeholder=""/>
                             {errors.confirmPassword && touched.confirmPassword && (
                                 <div className="red mt-2">{errors.confirmPassword}</div>
                             )}
 
                             <label htmlFor="name" className="mt-2">Name</label>
-                            <Field name="name" type="text" validate={validateName}  placeholder="alex" />
+                            <Field name="name" type="text" validate={validateName} placeholder="alex"/>
                             {errors.name && touched.name && (
                                 <div className="red mt-2">{errors.name}</div>
                             )}
 
-                            <button type="submit" className="btn pointer bor-rad btn-primary mt-4" disabled={isSubmitting}>
+                            <button type="submit" className="btn pointer bor-rad btn-primary mt-4"
+                                    disabled={isSubmitting}>
                                 <span>Sign-Up</span>
                             </button>
                             <Link to="/auth/signin" className="text-center mt-2">
-                                <span >Sign-In</span>
+                                <span>Sign-In</span>
                             </Link>
                         </Form>
                     )}

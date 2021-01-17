@@ -1,6 +1,5 @@
 
-
-const initialState = {
+const initialState  = {
     items:[],
     isLoaded:false
 };

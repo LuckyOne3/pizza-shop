@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
-import { Link } from 'react-router-dom';
+import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
+import {Link} from 'react-router-dom';
 import {CartItem} from './cartItem'
 import {
     clearCart,
@@ -13,9 +13,10 @@ import {
 // @ts-ignore
 import Currency from 'react-currency-formatter';
 // @ts-ignore
-import { Formik, Field, Form } from "formik";
+import {Formik, Field, Form} from "formik";
+import {CartItemPizza} from "../types";
 
-function validate(value:any) {
+function validate(value: any) {
     let error;
     if (!value) {
         error = "Required";
@@ -23,10 +24,9 @@ function validate(value:any) {
     return error;
 }
 
-export const Cart:React.FC = () => {
+export const Cart: React.FC = () => {
     const dispatch = useDispatch();
-    // @ts-ignore
-    const { totalPrice, totalCount, items, currency, delivery,user } = useSelector(({ cart }) => cart);
+    const {totalPrice, totalCount, items, currency, delivery, user} = useSelector(({cart}: RootStateOrAny) => cart);
 
     const addedPizzas = Object.keys(items).map((key) => {
         return items[key].items[0];
@@ -34,38 +34,33 @@ export const Cart:React.FC = () => {
 
     const onClearCart = () => {
 
-            dispatch(clearCart());
+        dispatch(clearCart());
 
     };
 
 
-    const onRemoveItem = (id:any) => {
+    const onRemoveItem = (id: number) => {
 
-            dispatch(removeCartItem(id));
+        dispatch(removeCartItem(id));
 
     };
 
-    const onPlusItem = (id:any) => {
+    const onPlusItem = (id: number) => {
         dispatch(plusCartItem(id));
     };
 
-    const onMinusItem = (id:any) => {
+    const onMinusItem = (id: number) => {
         dispatch(minusCartItem(id));
     };
 
-
-
-
-
-    // @ts-ignore
-    // @ts-ignore
     return (
         <div className="container  mt-8">
             {totalCount ? (
                 <div className="cart">
                     <div className="cart__top flex-row d-flex justify-content-between mb-4">
                         <div className="d-flex align-items-center">
-                            <img className="mr-2" src="https://img.icons8.com/ios-filled/24/000000/shopping-cart.png"/>
+                            <img alt="" className="mr-2"
+                                 src="https://img.icons8.com/ios-filled/24/000000/shopping-cart.png"/>
                             Cart
                         </div>
                         <div className="d-flex align-items-center ">
@@ -110,9 +105,11 @@ export const Cart:React.FC = () => {
                         </div>
                     </div>
                     <div className="row">
-                        {addedPizzas.map((obj:any) => (
-                            //@ts-ignore
-                            <CartItem key={obj.id} id ={obj.id} currency={currency} imageUrl ={obj.imageUrl} name={obj.name} type={obj.type} size={obj.size} totalPrice={items[obj.id].totalPrice} totalCount={items[obj.id].items.length} onRemove={onRemoveItem} onMinus={onMinusItem} onPlus={onPlusItem}
+                        {addedPizzas.map((obj: CartItemPizza) => (
+
+                            <CartItem key={obj.id} data={obj} currency={currency} totalPrice={items[obj.id].totalPrice}
+                                      totalCount={items[obj.id].items.length} onRemove={onRemoveItem}
+                                      onMinus={onMinusItem} onPlus={onPlusItem}
                             />
                         ))}
                     </div>
@@ -172,7 +169,7 @@ export const Cart:React.FC = () => {
                                     <button className="btn btn-primary bor-rad">Go back</button>
                                 </Link>
                             </Link>
-                            <div  >
+                            <div>
                                 <Formik
                                     initialValues={{
                                         street: "",
@@ -181,15 +178,15 @@ export const Cart:React.FC = () => {
                                     }}
                                     onSubmit={async (values) => {
                                         let data = {
-                                            name:"guest",
-                                            email:"guest",
-                                            street:"",
-                                            flatoffice:"",
-                                            floor:"",
-                                            totalprice:"",
-                                            currency:""
+                                            name: "guest",
+                                            email: "guest",
+                                            street: "",
+                                            flatoffice: "",
+                                            floor: "",
+                                            totalprice: "",
+                                            currency: ""
                                         }
-                                        if(user.email){
+                                        if (user.email) {
 
                                             data.name = user.name
                                             data.email = user.email
@@ -202,33 +199,37 @@ export const Cart:React.FC = () => {
 
                                         dispatch(fetchSetOrder(data));
 
-                                         onClearCart()
+                                        onClearCart()
                                     }}
                                 >
 
                                     { //@ts-ignore
-                                        ({ isSubmitting, errors, touched, isValidating }) => (
-                                        <Form className="form-group d-flex flex-column" >
-                                            <label htmlFor="street">Street</label>
-                                            <Field name="street" validate={validate} placeholder="cool street" />
-                                            {errors.street && touched.street && (
-                                                <div className="red">{errors.street}</div>
-                                            )}
+                                        ({isSubmitting, errors, touched, isValidating}) => (
+                                            <Form className="form-group d-flex flex-column">
+                                                <label htmlFor="street">Street</label>
+                                                <Field name="street" validate={validate} placeholder="cool street"/>
+                                                {errors.street && touched.street && (
+                                                    <div className="red">{errors.street}</div>
+                                                )}
 
-                                            <label htmlFor="flatOffice" className="mt-2">Flat / Office</label>
-                                            <Field name="flatOffice" validate={validate} placeholder="Office" />
-                                            {errors.flatOffice && touched.flatOffice && (
-                                                <div className="red">{errors.flatOffice}</div>
-                                            )}
+                                                <label htmlFor="flatOffice" className="mt-2">Flat / Office</label>
+                                                <Field name="flatOffice" validate={validate} placeholder="Office"/>
+                                                {errors.flatOffice && touched.flatOffice && (
+                                                    <div className="red">{errors.flatOffice}</div>
+                                                )}
 
-                                            <label htmlFor="floor" className="mt-2">Floor</label>
-                                            <Field name="floor" placeholder="1" type="text" />
+                                                <label htmlFor="floor" className="mt-2">Floor</label>
+                                                <Field name="floor" validate={validate} placeholder="1" type="text"/>
+                                                {errors.floor && touched.floor && (
+                                                    <div className="red">{errors.floor}</div>
+                                                )}
 
-                                            <button type="submit" className="btn pointer bor-rad btn-danger mt-4" disabled={isSubmitting}>
-                                                <span>Order</span>
-                                            </button>
-                                        </Form>
-                                    )}
+                                                <button type="submit" className="btn pointer bor-rad btn-danger mt-4"
+                                                        disabled={isSubmitting}>
+                                                    <span>Order</span>
+                                                </button>
+                                            </Form>
+                                        )}
                                 </Formik>
 
                             </div>

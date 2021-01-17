@@ -47,7 +47,7 @@ export const fetchSetUser = (userData:any) =>  async (dispatch:any)=> {
 
         const response = await axios.post(API + '/register', userData);
 
-        let data = await response;
+        await response;
 
     dispatch(fetchLoginUser({'name':userData.name,'email':userData.email,'password':userData.password}))
 
@@ -56,7 +56,7 @@ export const fetchSetUser = (userData:any) =>  async (dispatch:any)=> {
 export const fetchSetOrder = (userData:any) =>  async ()=> {
 
     const response = await axios.post(API + '/order-make', userData);
-    let data = await response;
+    await response;
 
 }
 export const fetchShowOrders = (userData:any) =>  async (dispatch:any)=> {

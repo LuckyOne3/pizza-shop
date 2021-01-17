@@ -5,12 +5,13 @@ import "react-loader-spinner/dist/loader/css/react-spinner-loader.css"
 import Loader from 'react-loader-spinner'
 
 import {Item} from './item'
-import {useDispatch, useSelector} from "react-redux";
+import {RootStateOrAny, useDispatch, useSelector} from "react-redux";
 import {fetchPizzas, lastPizza} from "../../redux/actions/pizzas";
 import {addPizza} from '../../redux/actions/cart';
 
-
 import {Notification} from "./notification";
+
+import {CartItemPizza} from "../types";
 
 
 const loader = <Loader className="m-auto"
@@ -21,10 +22,11 @@ const loader = <Loader className="m-auto"
                        interval={3000} //3 secs
 
 />
-export const Catalog: React.FC = (props:any) => {
 
-    const {isLoaded, items}: any = useSelector(({pizzas}: any) => (pizzas))
-    const {currency}: any = useSelector(({cart}: any) => (cart))
+export const Catalog: React.FC = () => {
+
+    const {isLoaded, items} = useSelector(({pizzas}: RootStateOrAny) => (pizzas))
+    const {currency} = useSelector(({cart}: RootStateOrAny) => (cart))
 
     const dispatch = useDispatch()
     useEffect(() => {
@@ -33,14 +35,14 @@ export const Catalog: React.FC = (props:any) => {
 
     }, [])
 
-    const handleAddToCart = (objPizza: any) => {
+    const handleAddToCart = (objPizza: CartItemPizza) => {
         dispatch(addPizza(objPizza))
     }
     const handleLastItem = () => {
         dispatch(lastPizza())
     }
 
-
+    const ItemsArrayLenght = items.length - 1
 
     return (
 
@@ -52,8 +54,10 @@ export const Catalog: React.FC = (props:any) => {
             </div>
             <div className={isLoaded ? 'row' : ' row invisible opacity-0-pizza'}>
                 {
-                        // @ts-ignore
-                     items.map((obj, index, array) => <Item key={index + obj.name} onAddToCart={handleAddToCart} last={{index,handleLastItem, array}} currency={currency} data={obj}/>)
+
+                    items.map((obj: CartItemPizza, index: number, array: CartItemPizza[]) => <Item
+                        key={index + obj.name} onAddToCart={handleAddToCart}
+                        last={{index, handleLastItem, ItemsArrayLenght}} currency={currency} data={obj}/>)
                 }
             </div>
         </div>

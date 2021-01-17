@@ -1,7 +1,7 @@
 import React from 'react';
 import Pizza from '../../assets/20v58PICD9d7z4V41T3Ui_PIC2018.png_860.png'
 import {Link} from 'react-router-dom';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector, useDispatch, RootStateOrAny} from 'react-redux';
 import {setCurrency} from "../../redux/actions/cart";
 // @ts-ignore
 import Currency from 'react-currency-formatter';
@@ -11,7 +11,7 @@ export const Header: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const {totalPrice, totalCount, currency, user}: any = useSelector(({cart}: any) => (cart))
+    const {totalPrice, currency, user} = useSelector(({cart}: RootStateOrAny) => (cart))
 
     return (
         <nav className="navbar navbar-light bg-light fixed-top shadow">
