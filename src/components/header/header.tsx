@@ -70,7 +70,7 @@ export const Header: React.FC = () => {
                             </Link>
                         </div>
                         <div className="d-flex">
-                            {!user || !user.token
+                            {!user || !user.email
                                 ?
                                 <Link to="/auth/signin">
                                     <div className="btn-group" role="group">
